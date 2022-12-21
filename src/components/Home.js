@@ -7,7 +7,6 @@ const Home = (props) => {
   const [blogs, setBlogs] = useState([]);
   const { getBlogs, getBlogsCount, pageCount, setSelectedBlog } =
     useContext(BlogContext);
-  // const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
   const nextPage = () => {
