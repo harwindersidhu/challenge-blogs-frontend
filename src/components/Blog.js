@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { BlogContext } from "../context/BlogContext";
 
 const Blog = () => {
+  const { selectedBlog } = useContext(BlogContext);
+
   return (
     <div className="blog">
-      <h2>Blog</h2>
+      <div dangerouslySetInnerHTML={{ __html: selectedBlog.content }} />
     </div>
   );
 };

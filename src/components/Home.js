@@ -1,23 +1,48 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BlogContext } from "../context/BlogContext";
 import BlogsItem from "./BlogsItem";
+import { useNavigate } from "react-router";
 
-const Home = () => {
+const Home = (props) => {
   const [blogs, setBlogs] = useState([]);
-  const { getBlogs } = useContext(BlogContext);
+  const { getBlogs, getBlogsCount, pageCount, setSelectedBlog } =
+    useContext(BlogContext);
+  // const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+
+  const nextPage = () => {
+    if (props.page < pageCount) {
+      props.setPage(props.page + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (props.page > 1) {
+      props.setPage(props.page - 1);
+    }
+  };
+
+  const displayBlog = (blog) => {
+    console.log(blog);
+    setSelectedBlog(() => blog);
+    const blogPath = `/blog/${blog.slug}`;
+    navigate(blogPath);
+  };
 
   useEffect(() => {
-    getBlogs(1).then((data) => {
+    getBlogsCount();
+    getBlogs(props.page).then((data) => {
       setBlogs(() => data);
     });
-  }, []);
-  console.log("Blogs: ", blogs);
+  }, [props.page]);
+
   const blogsItems = blogs.map((blog) => (
     <BlogsItem
       key={blog.id}
       title={blog.title}
       image={blog.image}
       date={blog.published_at}
+      displayBlog={() => displayBlog(blog)}
     />
   ));
 
@@ -26,8 +51,16 @@ const Home = () => {
       <span className="title">Blogs</span>
       <div className="home-blogs">{blogsItems}</div>
       <div className="pagination">
-        <button className="previous-button">Prev</button>
-        <button className="next-button">Next</button>
+        {props.page > 1 && (
+          <button className="previous-button" onClick={prevPage}>
+            Prev
+          </button>
+        )}
+        {props.page < 3 && (
+          <button className="next-button" onClick={nextPage}>
+            Next
+          </button>
+        )}
       </div>
     </div>
   );
