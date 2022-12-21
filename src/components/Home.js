@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BlogContext } from "../context/BlogContext";
+import BlogsItem from "./BlogsItem";
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
@@ -11,10 +12,23 @@ const Home = () => {
     });
   }, []);
   console.log("Blogs: ", blogs);
+  const blogsItems = blogs.map((blog) => (
+    <BlogsItem
+      key={blog.id}
+      title={blog.title}
+      image={blog.image}
+      date={blog.published_at}
+    />
+  ));
 
   return (
-    <div className="blog">
-      <h2>Home</h2>
+    <div className="home">
+      <span className="title">Blogs</span>
+      <div className="home-blogs">{blogsItems}</div>
+      <div className="pagination">
+        <button className="previous-button">Prev</button>
+        <button className="next-button">Next</button>
+      </div>
     </div>
   );
 };

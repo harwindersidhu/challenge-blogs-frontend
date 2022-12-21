@@ -1,0 +1,68 @@
+.App {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+
+  .home {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .title {
+      font-size: 20px;
+    }
+
+    .home-blogs {
+      height: 70%;
+      width: 90%;
+      display: flex;
+      flex-wrap: wrap;
+
+      .blog-item {
+        border: 1px solid black;
+        height: 48%;
+        width: 30%;
+        flex: 1 0 30%; /* explanation below */
+        margin: 5px;
+        padding: 0.5em 0.5em;
+
+        .blog-title {
+          font-size: 16px;
+          margin-top: 1em;
+        }
+
+        img {
+          height: 10em;
+          width: 100%;
+          object-fit: cover;
+          margin-top: 1em;
+        }
+
+        p {
+          margin-top: 1em;
+        }
+      }
+    }
+
+    .pagination {
+      width: 15%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      button {
+        background-color: #7b96ec;
+        color: white;
+        padding: 10px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+}
