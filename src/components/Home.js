@@ -55,7 +55,7 @@ const Home = (props) => {
             Prev
           </button>
         )}
-        {props.page < 3 && (
+        {props.page < pageCount && (
           <button className="next-button" onClick={nextPage}>
             Next
           </button>
